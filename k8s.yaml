@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deploy-writes-random
+  name: deploy-writes-random
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deploy-writes-random
+  template:
+    metadata:
+      labels:
+        app: deploy-writes-random
+    spec:
+      containers:
+      - image: gcr.io/PROJECT_ID/spanner-codelab:0.01
+        name: spanner-codelab
+        command: ["python"]
+        args: ["randomwrites.py"]

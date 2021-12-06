@@ -7,17 +7,17 @@ def run_writes(database):
         id = str(uuid.uuid4())
         with database.batch() as batch:
             batch.insert(
-                table='Albums',
-                columns=("AlbumId", 'Year', 'AlbumTitle'),
-                values=[(id, 2021, "AlbumTitle"),]
+                table='Merchandise',
+                columns=("MerchandiseId", 'ProductionYear', 'MerchandiseName'),
+                values=[(id, 2021, "Test MerchandiseName"),]
                 )
 
 if __name__ == "__main__":
     try:
         client = Client()
-        instance = client.instance('codelab-instance')
+        instance = client.instance('cymbal-shops-instance')
         pool = TransactionPingingPool(size=10, default_timeout=5, ping_interval=300)
-        database = instance.database('codelabdb')
+        database = instance.database('testdb')
         for _ in range(10):
             _thread.start_new_thread(run_writes,(database,))
             print('started Thread' + str(_))

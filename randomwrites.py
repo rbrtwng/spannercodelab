@@ -17,7 +17,7 @@ if __name__ == "__main__":
         client = Client()
         instance = client.instance('cymbal-shops-instance')
         pool = TransactionPingingPool(size=10, default_timeout=5, ping_interval=300)
-        database = instance.database('testdb')
+        database = instance.database('cymbaldb')
         for _ in range(10):
             _thread.start_new_thread(run_writes,(database,))
             print('started Thread' + str(_))
